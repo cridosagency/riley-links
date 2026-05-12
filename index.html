@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
 
-        /* HIGH-VISIBILITY HINT BAR */
+        /* IN-APP BROWSER HINT */
         #app-hint {
             display: none;
             width: 100%;
@@ -42,7 +42,7 @@
             box-sizing: border-box;
         }
 
-        /* TOP CARD WITH OVERLAY */
+        /* TOP PROFILE CARD */
         .profile-box {
             position: relative;
             width: 100%;
@@ -78,7 +78,7 @@
 
         .cta-text { text-align: center; font-size: 14px; margin: 30px 0; font-weight: 500; }
 
-        /* POOL CARD WITH BUZZ */
+        /* POOL CARD RECTANGLE */
         .exclusive-card {
             position: relative;
             width: 100%;
@@ -92,14 +92,19 @@
 
         .exclusive-card img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* CLEAN WHITE LABEL */
         .exclusive-label {
             position: absolute;
-            bottom: 15px; left: 0; right: 0;
-            text-align: center; font-weight: 600; font-size: 18px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            bottom: 20px;
+            left: 0; right: 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 20px;
+            color: #fff; /* Back to white as requested */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8); /* Shadow keeps it readable on water */
         }
 
-        /* BUZZ EFFECT */
+        /* THE BUZZ */
         @keyframes buzz {
             0%, 90%, 100% { transform: translate(0, 0) rotate(0deg); }
             91% { transform: translate(-1.5px, 1.5px) rotate(-1deg); }
@@ -121,16 +126,16 @@
             <img src="top.jpg" alt="Riley">
             <div class="gradient-overlay">
                 <h1>Riley ❤️</h1>
-                <div class="handle">@justrileyxo</div>
+                <div class="handle">@justriley</div>
                 <div class="icons">
-                    <a href="https://urlgeni.us/justrileyxo" class="icon-circle">🔒</a>
+                    <a href="https://onlyfans.com/justrileyxo/c12" class="icon-circle">🔒</a>
                 </div>
             </div>
         </div>
 
         <p class="cta-text">Below is what you're looking for ;)</p>
 
-        <a href="https://urlgeni.us/justrileyxo" class="exclusive-card" id="vip-link">
+        <a href="https://onlyfans.com/justrileyxo/c12" class="exclusive-card" id="vip-link">
             <img src="pool.jpg" alt="Exclusive">
             <div class="exclusive-label">Exclusive things ;)</div>
         </a>
@@ -140,27 +145,21 @@
     <script>
         const ua = navigator.userAgent || navigator.vendor || window.opera;
         const isApp = /Instagram|FBAN|FBAV|TikTok|Telegram/i.test(ua);
-        const targetUrl = "https://urlgeni.us/justrileyxo";
+        const targetUrl = "https://onlyfans.com/justrileyxo/c12";
 
         if (isApp) {
             document.getElementById('app-hint').style.display = 'block';
         }
 
         document.getElementById('vip-link').addEventListener('click', function(e) {
-            // ANDROID GLITCH
             if (/Android/i.test(ua)) {
                 e.preventDefault();
                 window.location.href = "intent://" + targetUrl.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
             } 
-            // IOS GLITCH
             else if (/iPhone|iPad|iPod/i.test(ua) && isApp) {
-                // This 'glitch' tries to trigger the system browser handler 
-                // by opening a blank tab and then redirecting the primary one.
                 window.open(targetUrl, '_blank');
-                
-                // Fallback alert for stubborn versions of IG
                 setTimeout(() => {
-                    alert("Almost there! 🍒 Tap the ( ⋮ ) at the top right and select 'Open in Safari' to see the video.");
+                    alert("Almost there! 🍒 Tap the ( ⋮ ) at the top right and select 'Open in Safari' to see the full vid.");
                 }, 800);
             }
         });
