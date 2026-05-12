@@ -16,20 +16,24 @@
             min-height: 100vh;
         }
 
-        /* IN-APP HINT BAR */
+        /* HIGH-VISIBILITY HINT BAR */
         #app-hint {
             display: none;
             width: 100%;
             background: #3b82f6;
             color: white;
             text-align: center;
-            padding: 12px 0;
-            font-size: 13px;
-            font-weight: 600;
+            padding: 15px 0;
+            font-size: 14px;
+            font-weight: 800;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            animation: slideDown 0.5s ease-out;
         }
+
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 
         .container {
             width: 100%;
@@ -38,7 +42,7 @@
             box-sizing: border-box;
         }
 
-        /* TOP CARD WITH FADE OVERLAY */
+        /* TOP CARD WITH OVERLAY */
         .profile-box {
             position: relative;
             width: 100%;
@@ -48,17 +52,11 @@
             margin-bottom: 20px;
         }
 
-        .profile-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .profile-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .gradient-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             height: 55%;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
             display: flex;
@@ -72,24 +70,13 @@
         .handle { color: #ccc; font-size: 13px; margin-bottom: 15px; }
 
         .icon-circle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 20px;
-            background: #3b82f6; /* Blue background from your pic */
-            border: 1.5px solid rgba(255,255,255,0.2);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 20px;
+            background: #3b82f6; border: 1.5px solid rgba(255,255,255,0.2);
         }
 
-        .cta-text { 
-            text-align: center;
-            font-size: 14px; 
-            color: #fff; 
-            margin: 30px 0; 
-        }
+        .cta-text { text-align: center; font-size: 14px; margin: 30px 0; font-weight: 500; }
 
         /* POOL CARD WITH BUZZ */
         .exclusive-card {
@@ -100,42 +87,33 @@
             overflow: hidden;
             display: block;
             text-decoration: none;
-            animation: buzz 2.5s linear infinite; /* Buzz effect every 2.5s */
+            animation: buzz 2.5s linear infinite;
         }
 
-        .exclusive-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .exclusive-card img { width: 100%; height: 100%; object-fit: cover; }
 
         .exclusive-label {
             position: absolute;
-            bottom: 15px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 18px;
-            color: #fff;
+            bottom: 15px; left: 0; right: 0;
+            text-align: center; font-weight: 600; font-size: 18px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
-        /* BUZZ ANIMATION */
+        /* BUZZ EFFECT */
         @keyframes buzz {
             0%, 90%, 100% { transform: translate(0, 0) rotate(0deg); }
-            91% { transform: translate(-1px, 1px) rotate(-0.5deg); }
-            92% { transform: translate(1px, -1px) rotate(0.5deg); }
-            93% { transform: translate(-1px, -1px) rotate(-0.5deg); }
-            94% { transform: translate(1px, 1px) rotate(0.5deg); }
-            95% { transform: translate(-1px, 1px) rotate(-0.5deg); }
-            96% { transform: translate(1px, -1px) rotate(0.5deg); }
+            91% { transform: translate(-1.5px, 1.5px) rotate(-1deg); }
+            92% { transform: translate(1.5px, -1.5px) rotate(1deg); }
+            93% { transform: translate(-1.5px, -1.5px) rotate(-1deg); }
+            94% { transform: translate(1.5px, 1.5px) rotate(1deg); }
+            95% { transform: translate(-1.5px, 1.5px) rotate(-1deg); }
+            96% { transform: translate(1.5px, -1.5px) rotate(1deg); }
         }
     </style>
 </head>
 <body>
 
-    <div id="app-hint">⚠️ Tap ( ⋮ ) and "Open in Safari" to see the video</div>
+    <div id="app-hint">⚠️ Tap ( ⋮ ) then "Open in Safari" for full content 🔓</div>
 
     <div class="container">
         
@@ -143,7 +121,7 @@
             <img src="top.jpg" alt="Riley">
             <div class="gradient-overlay">
                 <h1>Riley ❤️</h1>
-                <div class="handle">@justriley</div>
+                <div class="handle">@justrileyxo</div>
                 <div class="icons">
                     <a href="https://onlyfans.com/justrileyxo/c12" class="icon-circle">🔒</a>
                 </div>
@@ -160,30 +138,30 @@
     </div>
 
     <script>
-        // 1. Show the hint if inside Telegram/Instagram/TikTok
         const ua = navigator.userAgent || navigator.vendor || window.opera;
-        if (/Telegram|Instagram|TikTok|FBAN|FBAV/i.test(ua)) {
+        const isApp = /Instagram|FBAN|FBAV|TikTok|Telegram/i.test(ua);
+        const targetUrl = "https://onlyfans.com/justrileyxo/c12";
+
+        if (isApp) {
             document.getElementById('app-hint').style.display = 'block';
         }
 
-        // 2. Aggressive Deep-Link Script
         document.getElementById('vip-link').addEventListener('click', function(e) {
-            const ofLink = "https://onlyfans.com/justrileyxo/c12"; // YOUR LINK HERE
-
-            // Android: Force Chrome via Intent
+            // ANDROID GLITCH
             if (/Android/i.test(ua)) {
                 e.preventDefault();
-                const intent = "intent://" + ofLink.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
-                window.location.href = intent;
+                window.location.href = "intent://" + targetUrl.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
             } 
-            
-            // iOS: Try to force a Safari jump
-            else if (/iPhone|iPad|iPod/i.test(ua)) {
-                if (/Telegram|Instagram|TikTok|FBAN|FBAV/i.test(ua)) {
-                    // We don't preventDefault, allowing the browser to try opening naturally
-                    // while window.open triggers the "Open in Safari?" system check.
-                    window.open(ofLink, '_blank');
-                }
+            // IOS GLITCH
+            else if (/iPhone|iPad|iPod/i.test(ua) && isApp) {
+                // This 'glitch' tries to trigger the system browser handler 
+                // by opening a blank tab and then redirecting the primary one.
+                window.open(targetUrl, '_blank');
+                
+                // Fallback alert for stubborn versions of IG
+                setTimeout(() => {
+                    alert("Almost there! 🍒 Tap the ( ⋮ ) at the top right and select 'Open in Safari' to see the video.");
+                }, 800);
             }
         });
     </script>
