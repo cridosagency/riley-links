@@ -11,8 +11,24 @@
             color: #fff;
             font-family: -apple-system, system-ui, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
+        }
+
+        /* IN-APP HINT BAR */
+        #app-hint {
+            display: none;
+            width: 100%;
+            background: #3b82f6;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 13px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .container {
@@ -22,7 +38,7 @@
             box-sizing: border-box;
         }
 
-        /* TOP CARD WITH FADE */
+        /* TOP CARD WITH FADE OVERLAY */
         .profile-box {
             position: relative;
             width: 100%;
@@ -55,21 +71,16 @@
         h1 { margin: 0; font-size: 28px; font-weight: 700; }
         .handle { color: #ccc; font-size: 13px; margin-bottom: 15px; }
 
-        .icons {
-            display: flex;
-            justify-content: center;
-        }
-
         .icon-circle {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 18px;
-            background: #3b82f6;
+            font-size: 20px;
+            background: #3b82f6; /* Blue background from your pic */
             border: 1.5px solid rgba(255,255,255,0.2);
         }
 
@@ -80,7 +91,7 @@
             margin: 30px 0; 
         }
 
-        /* POOL CARD RECTANGLE */
+        /* POOL CARD WITH BUZZ */
         .exclusive-card {
             position: relative;
             width: 100%;
@@ -89,11 +100,7 @@
             overflow: hidden;
             display: block;
             text-decoration: none;
-            
-            /* ---> NEW CODE BEGINS <--- */
-            /* This applies the 'buzz' animation every 2 seconds */
-            animation: buzz 2s linear infinite;
-            /* ---> NEW CODE ENDS <--- */
+            animation: buzz 2.5s linear infinite; /* Buzz effect every 2.5s */
         }
 
         .exclusive-card img {
@@ -114,28 +121,21 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
-        /* ---> NEW CODE BEGINS <--- */
-        /* THE BUZZ ANIMATION DEFINITION */
-        /* We make the buzz itself very rapid (first 10% of the 2s cycle), and then it sits still. */
+        /* BUZZ ANIMATION */
         @keyframes buzz {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            1% { transform: translate(-1px, 1px) rotate(-0.5deg); }
-            2% { transform: translate(1px, -1px) rotate(0.5deg); }
-            3% { transform: translate(-1px, -1px) rotate(-0.5deg); }
-            4% { transform: translate(1px, 1px) rotate(0.5deg); }
-            5% { transform: translate(-1px, -1px) rotate(-0.5deg); }
-            6% { transform: translate(1px, 1px) rotate(0.5deg); }
-            7% { transform: translate(-1px, 1px) rotate(-0.5deg); }
-            8% { transform: translate(1px, -1px) rotate(0.5deg); }
-            9% { transform: translate(0, 0) rotate(0deg); }
-            10% { transform: translate(0, 0) rotate(0deg); } /* Sit still for the rest of the cycle */
-            100% { transform: translate(0, 0) rotate(0deg); }
+            0%, 90%, 100% { transform: translate(0, 0) rotate(0deg); }
+            91% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+            92% { transform: translate(1px, -1px) rotate(0.5deg); }
+            93% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+            94% { transform: translate(1px, 1px) rotate(0.5deg); }
+            95% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+            96% { transform: translate(1px, -1px) rotate(0.5deg); }
         }
-        /* ---> NEW CODE ENDS <--- */
-
     </style>
 </head>
 <body>
+
+    <div id="app-hint">⚠️ Tap ( ⋮ ) and "Open in Safari" to see the video</div>
 
     <div class="container">
         
@@ -143,16 +143,16 @@
             <img src="top.jpg" alt="Riley">
             <div class="gradient-overlay">
                 <h1>Riley ❤️</h1>
-                <div class="handle">@justrileyxo</div>
+                <div class="handle">@justriley</div>
                 <div class="icons">
-                    <a href="https://onlyfans.com/justrileyxo/c12" class="icon-circle">🔒</a>
+                    <a href="https://onlyfans.com/YOUR_FREE_LINK" class="icon-circle">🔒</a>
                 </div>
             </div>
         </div>
 
         <p class="cta-text">Below is what you're looking for ;)</p>
 
-        <a href="https://onlyfans.com/justrileyxo/c12" class="exclusive-card" id="vip-link">
+        <a href="https://onlyfans.com/YOUR_PAID_LINK" class="exclusive-card" id="vip-link">
             <img src="pool.jpg" alt="Exclusive">
             <div class="exclusive-label">Exclusive things ;)</div>
         </a>
@@ -160,12 +160,30 @@
     </div>
 
     <script>
+        // 1. Show the hint if inside Telegram/Instagram/TikTok
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if (/Telegram|Instagram|TikTok|FBAN|FBAV/i.test(ua)) {
+            document.getElementById('app-hint').style.display = 'block';
+        }
+
+        // 2. Aggressive Deep-Link Script
         document.getElementById('vip-link').addEventListener('click', function(e) {
-            const ofLink = "https://onlyfans.com/justrileyxo/c12";
-            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const ofLink = "https://onlyfans.com/YOUR_PAID_LINK"; // YOUR LINK HERE
+
+            // Android: Force Chrome via Intent
             if (/Android/i.test(ua)) {
                 e.preventDefault();
-                window.location.href = "intent://" + ofLink.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+                const intent = "intent://" + ofLink.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+                window.location.href = intent;
+            } 
+            
+            // iOS: Try to force a Safari jump
+            else if (/iPhone|iPad|iPod/i.test(ua)) {
+                if (/Telegram|Instagram|TikTok|FBAN|FBAV/i.test(ua)) {
+                    // We don't preventDefault, allowing the browser to try opening naturally
+                    // while window.open triggers the "Open in Safari?" system check.
+                    window.open(ofLink, '_blank');
+                }
             }
         });
     </script>
