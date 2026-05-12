@@ -69,7 +69,7 @@
             justify-content: center;
             text-decoration: none;
             font-size: 18px;
-            background: #3b82f6; /* That specific blue from your pic */
+            background: #3b82f6;
             border: 1.5px solid rgba(255,255,255,0.2);
         }
 
@@ -89,6 +89,11 @@
             overflow: hidden;
             display: block;
             text-decoration: none;
+            
+            /* ---> NEW CODE BEGINS <--- */
+            /* This applies the 'buzz' animation every 2 seconds */
+            animation: buzz 2s linear infinite;
+            /* ---> NEW CODE ENDS <--- */
         }
 
         .exclusive-card img {
@@ -108,6 +113,26 @@
             color: #fff;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
+
+        /* ---> NEW CODE BEGINS <--- */
+        /* THE BUZZ ANIMATION DEFINITION */
+        /* We make the buzz itself very rapid (first 10% of the 2s cycle), and then it sits still. */
+        @keyframes buzz {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            1% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+            2% { transform: translate(1px, -1px) rotate(0.5deg); }
+            3% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+            4% { transform: translate(1px, 1px) rotate(0.5deg); }
+            5% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+            6% { transform: translate(1px, 1px) rotate(0.5deg); }
+            7% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+            8% { transform: translate(1px, -1px) rotate(0.5deg); }
+            9% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(0, 0) rotate(0deg); } /* Sit still for the rest of the cycle */
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        /* ---> NEW CODE ENDS <--- */
+
     </style>
 </head>
 <body>
