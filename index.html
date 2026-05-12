@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>riley ;p</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #000; color: #fff; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { width: 100%; max-width: 450px; padding: 20px; box-sizing: border-box; text-align: center; }
+        .profile-img { width: 100%; aspect-ratio: 4/5; border-radius: 20px; object-fit: cover; margin-bottom: 15px; }
+        h1 { margin: 10px 0 0; font-size: 28px; }
+        .handle { color: #888; font-size: 14px; margin-bottom: 20px; }
+        .cta-text { font-size: 16px; margin-bottom: 20px; font-weight: 500; }
+        .exclusive-card { width: 100%; border-radius: 25px; overflow: hidden; position: relative; cursor: pointer; display: block; text-decoration: none; }
+        .exclusive-card img { width: 100%; display: block; border-radius: 25px; }
+        .exclusive-label { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-weight: bold; font-size: 20px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="top.jpg" class="profile-img" alt="Riley">
+        <h1>Riley ❤️</h1>
+        <div class="handle">@justriley</div>
+        <div class="cta-text">Below is what you're looking for ;)</div>
+        <a href="https://onlyfans.com/YOUR_PAID_USERNAME" class="exclusive-card" id="vip-link">
+            <img src="pool.jpg" alt="Exclusive">
+            <div class="exclusive-label">Exclusive things ;)</div>
+        </a>
+    </div>
+    <script>
+        document.getElementById('vip-link').addEventListener('click', function(e) {
+            const ofLink = "https://onlyfans.com/YOUR_PAID_USERNAME";
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            if (/Android/i.test(ua)) {
+                e.preventDefault();
+                window.location.href = "intent://" + ofLink.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+            }
+        });
+    </script>
+</body>
+</html>
