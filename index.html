@@ -17,63 +17,88 @@
 
         .container {
             width: 100%;
-            max-width: 400px; /* Slimmer container looks more professional */
+            max-width: 414px; /* Typical iPhone width */
             padding: 20px;
-            text-align: center;
+            box-sizing: border-box;
         }
 
-        /* Top Profile Pic */
-        .profile-img {
+        /* TOP SECTION WITH OVERLAY */
+        .profile-box {
+            position: relative;
             width: 100%;
-            aspect-ratio: 4/5;
-            border-radius: 20px;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        h1 { margin: 10px 0 0; font-size: 26px; font-weight: 700; }
-        .handle { color: #888; font-size: 13px; margin-bottom: 15px; }
-
-        /* Small Circle Icons */
-        .icons {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
+            aspect-ratio: 4 / 5;
+            border-radius: 25px;
+            overflow: hidden;
             margin-bottom: 20px;
         }
+
+        .profile-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* The Fade to Black Effect */
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 20px;
+        }
+
+        h1 { margin: 0; font-size: 26px; font-weight: 700; }
+        .handle { color: #ccc; font-size: 13px; margin-bottom: 15px; }
+
+        .icons {
+            display: flex;
+            gap: 10px;
+        }
+
         .icon-circle {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: #fff;
-            color: #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
             text-decoration: none;
+            font-size: 16px;
+            border: 1.5px solid rgba(255,255,255,0.3);
         }
 
-        .cta-text { font-size: 14px; color: #ccc; margin-bottom: 15px; }
+        /* Specific colors from your pic */
+        .bg-blue { background: #3b82f6; }
+        .bg-pink { background: #f472b6; }
 
-        /* THE "NORMAL RECTANGLE" CARD */
+        .cta-text { 
+            text-align: center;
+            font-size: 14px; 
+            color: #fff; 
+            margin: 25px 0; 
+        }
+
+        /* POOL RECTANGLE WITH OVERLAY */
         .exclusive-card {
-            width: 100%;
-            aspect-ratio: 16 / 9; /* This creates the "Normal Rectangle" shape */
-            border-radius: 20px;
-            overflow: hidden;
             position: relative;
-            cursor: pointer;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            border-radius: 25px;
+            overflow: hidden;
             display: block;
             text-decoration: none;
-            border: 1px solid #333; /* Adds a subtle outline */
         }
 
         .exclusive-card img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Crops the photo perfectly to fit the rectangle */
-            display: block;
+            object-fit: cover;
         }
 
         .exclusive-label {
@@ -85,50 +110,38 @@
             font-weight: 600;
             font-size: 18px;
             color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-        }
-
-        .footer-nav {
-            margin-top: 25px;
-            color: #444;
-            font-size: 12px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="top.jpg" class="profile-img" alt="Riley">
         
-        <h1>Riley ❤️</h1>
-        <div class="handle">@justriley</div>
-
-        <div class="icons">
-            <a href="https://onlyfans.com/YOUR_FREE_PAGE" class="icon-circle">🔒</a>
-            <a href="https://twitter.com/YOUR_HANDLE" class="icon-circle">📸</a>
+        <div class="profile-box">
+            <img src="top.jpg" alt="Riley">
+            <div class="gradient-overlay">
+                <h1>Riley ❤️</h1>
+                <div class="handle">@justriley</div>
+                <div class="icons">
+                    <a href="https://onlyfans.com/YOUR_FREE_LINK" class="icon-circle bg-blue">🔒</a>
+                    <a href="https://onlyfans.com/YOUR_PAID_LINK" class="icon-circle bg-pink">me</a>
+                </div>
+            </div>
         </div>
 
         <p class="cta-text">Below is what you're looking for ;)</p>
 
-        <a href="https://onlyfans.com/YOUR_PAID_PAGE" class="exclusive-card" id="vip-link">
+        <a href="https://onlyfans.com/YOUR_PAID_LINK" class="exclusive-card" id="vip-link">
             <img src="pool.jpg" alt="Exclusive">
             <div class="exclusive-label">Exclusive things ;)</div>
         </a>
 
-        <div class="footer-nav">
-            <span>Shouts</span>
-            <span>Media</span>
-        </div>
     </div>
 
     <script>
         document.getElementById('vip-link').addEventListener('click', function(e) {
-            const ofLink = "https://onlyfans.com/YOUR_PAID_PAGE";
+            const ofLink = "https://onlyfans.com/YOUR_PAID_LINK";
             const ua = navigator.userAgent || navigator.vendor || window.opera;
             if (/Android/i.test(ua)) {
                 e.preventDefault();
@@ -136,5 +149,6 @@
             }
         });
     </script>
+
 </body>
 </html>
